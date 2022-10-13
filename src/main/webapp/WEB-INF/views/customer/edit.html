@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Customer Information</title>
+    <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/all.min.css">
+    <style>
+        .row-head {
+            background-color: rgb(58, 116, 224);
+            color: white;
+            height: 100px;
+            padding: 20px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row>div>a {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .button-head {
+            text-align: end;
+        }
+
+        .row-body {
+            margin-top: 20px;
+        }
+
+        .row-body>div>div {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row row-head">
+        <div class="col-8">
+            <h2>Update Customer Information</h2>
+        </div>
+        <div class="col-4 button-head">
+            <a href="/customers" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>
+                List of customers</a>
+        </div>
+    </div>
+
+    <form action="/customers/edit" th:object="${customer}" id="frmUpdateCustomer" method="post"
+          novalidate="novalidate">
+        <!--            <input type="hidden" name="_method" value="put">-->
+        <fieldset class="row g-3">
+            <input th:type="hidden" th:field="*{id}">
+            <input th:type="hidden" th:field="*{balance}">
+            <div class="col-md-6">
+                <label class="form-label">Full name</label>
+                <input type="text" class="form-control" th:field="*{fullName}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" th:field="*{email}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                <input type="tel" class="form-control" th:field="*{phone}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" th:field="*{address}">
+            </div>
+            <div class="col-md-12">
+                <button type="submit" id="btnUpdateCustomer" class="btn btn-outline-secondary">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Save changes
+                </button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="alert" style="position: fixed; bottom: 0">
+    <th:block th:if="${message}">
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <span th:text="${message}"></span>
+        </div>
+    </th:block>
+    <th:block th:if="${error}">
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button>
+            <span th:text="${error}"></span>
+        </div>
+    </th:block>
+</div>
+
+    <script src="bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

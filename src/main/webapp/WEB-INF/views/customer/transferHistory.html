@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Monney Information</title>
+    <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/all.min.css">
+    <style>
+        .row-head {
+            background-color: rgb(58, 116, 224);
+            color: white;
+            height: 100px;
+            padding: 20px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row>div>a {
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .button-head {
+            text-align: end;
+        }
+
+        thead {
+            background-color: rgb(10, 141, 21);
+            text-align: center;
+            color: white;
+        }
+        .foot-border {
+            border-top: 2px solid black;
+        }
+
+        table{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row row-head">
+            <div class="col-8">
+                <h1>Transfer money Information</h1>
+            </div>
+            <div class="col-4 button-head">
+                <a href="/customers" type="button" class="btn btn-outline-light "><i class="fa-solid fa-bars"></i>
+                    Customer list</a>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sender ID</th>
+                    <th>Sender Name</th>
+                    <th>Recipient ID</th>
+                    <th>Recipient Name</th>
+                    <th>Transfer Amount ($)</th>
+                    <th>Fees (%)</th>
+                    <th class="text-end">Fees Amount ($)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="item : ${transfers}">
+                    <tr>
+                        <td th:text="${item.id}"></td>
+                        <td th:text="${item.sender.id}"></td>
+                        <td th:text="${item.sender.fullName}"></td>
+                        <td th:text="${item.recipient.id}"></td>
+                        <td th:text="${item.recipient.fullName}"></td>
+                        <td th:text="${item.transferAmount}"></td>
+                        <td th:text="${item.fees}"></td>
+                        <td th:text="${item.feesAmount}" class="text-end"></td>
+                    </tr>
+                </th:block>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5"></td>
+                    <td class="text-center fw-bold">Total Fees Amount:</td>
+                    <td colspan="2" class="text-end fw-bold num-comma pr-20" style="font-size: 24px" th:text="${allFeesAmount}"></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

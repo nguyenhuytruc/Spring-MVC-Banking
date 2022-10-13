@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>customers</title>
+    <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/bootstrap-5.2.0-dist/css/all.min.css" />
+    <style>
+      .row {
+        height: 100px;
+        padding: 20px;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .row > div > h1 {
+        color: white;
+      }
+
+      .row > div > a {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .button-head,
+      .button-main {
+        text-align: end;
+      }
+
+      thead {
+        background-color: rgb(10, 141, 21);
+        text-align: center;
+        color: white;
+      }
+
+      .button-main > button {
+        margin-left: 10px;
+      }
+
+      table{
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row bg-primary">
+        <div class="col-6">
+          <h1>List of customers</h1>
+        </div>
+        <div class="col-6 button-head">
+          <a
+            href="/transfers"
+            type="button"
+            class="btn btn-outline-light"
+            ><i class="fa-solid fa-clock-rotate-left"></i> Transfer money
+            Information</a
+          >
+          <a
+            href="/customers/create"
+            type="button"
+            class="btn btn-outline-light"
+            ><i class="fa-regular fa-square-plus"></i> Add New Customer</a
+          >
+        </div>
+      </div>
+      <div class="main-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">FullName</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Address</th>
+              <th scope="col">Balance</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item : ${customers}">
+              <td th:text="${item.getId()}"></td>
+              <td th:text="${item.getFullName()}"></td>
+              <td th:text="${item.getEmail()}"></td>
+              <td th:text="${item.getPhone()}"></td>
+              <td th:text="${item.getAddress()}"></td>
+              <td th:text="${item.getBalance()}"></td>
+              <td class="button-main">
+                <a th:href="@{/customers/edit/__${item.getId()}__}"><button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-content="Content" aria-label="Edit"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                <a th:href="@{/customers/deposit/__${item.getId()}__}"><button type="button" class="btn btn-outline-success" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-content="Content" aria-label="Deposit"><i class="fa-solid fa-plus"></i></button></a>
+                <a th:href="@{/customers/withdraw/__${item.getId()}__}"><button type="button" class="btn btn-outline-warning" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-content="Content" aria-label="Withdraw"><i class="fa-solid fa-minus"></i></button></a>
+                <a th:href="@{/customers/transfer/__${item.getId()}__}"><button type="button" class="btn btn-outline-primary" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-content="Content" aria-label="Transfer"><i class="fa-solid fa-arrow-right-arrow-left"></i></button></a>
+                <a th:href="@{/customers/delete/__${item.getId()}__}"><button type="button" class="btn btn-outline-danger" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-content="Content" aria-label="Suspended"><i class="fa-solid fa-ban"></i></button></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      var popoverTriggerList = [].slice.call(
+        document.querySelectorAll('[data-bs-toggle="popover"]')
+      );
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl);
+      });
+    </script>
+  </body>
+</html>
